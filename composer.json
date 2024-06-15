@@ -26,7 +26,8 @@
         "classes/",
         "controllers/",
         "core/",
-        "include/"
+        "includes/",
+        "modules/"
       ]
     },
     "scripts": {
