@@ -34,7 +34,7 @@ jobs:
         presta-versions: ['9.0.0-alpha.1']
     steps:
       - name: Pull PrestaShop files (Tag ${{ matrix.presta-versions }})
-        run: docker run -tid --rm -v ps-volume:/var/www/html --name temp-ps prestashop/prestashop:${{ matrix.presta-versions }}
+        run: docker run -tid --rm -v ps-volume:/var/www/html --name temp-ps prestashop/prestashop
       - name: Wait for container to be loaded
         run: sleep 10
       - name: Checkout
