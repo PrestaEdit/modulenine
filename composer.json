@@ -1,0 +1,37 @@
+{
+    "name": "prestaedit/creativeelements",
+    "type": "prestashop-module",
+    "config": {
+      "preferred-install": "dist",
+      "optimize-autoloader": true,
+      "prepend-autoloader": false
+    },
+    "require": {
+      "php": ">=8.1",
+    },
+    "require-dev": {
+      "prestashop/php-dev-tools": "^4",
+      "phpunit/phpunit": "^8.5",
+      "mockery/mockery": "^1.3",
+      "phpstan/phpstan": "^1.4",
+      "friendsofphp/php-cs-fixer": "3.3.1",
+      "symfony/event-dispatcher": "^4.4.20"
+    },
+    "autoload": {
+      "classmap": [
+        "creativeelements.php",
+        "classes/",
+        "controllers/",
+        "core/",
+        "include/"
+      ]
+    },
+    "scripts": {
+      "test": [
+        "@php -d date.timezone=UTC ./vendor/bin/phpunit -c tests/phpunit.xml"
+      ],
+      "lint": [
+        "@php ./vendor/bin/php-cs-fixer fix --no-interaction --dry-run --diff"
+      ]
+    }
+  }
