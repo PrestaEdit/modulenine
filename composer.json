@@ -7,7 +7,7 @@
       "prepend-autoloader": false
     },
     "require": {
-      "php": ">=8.1",
+      "php": ">=8.1"
     },
     "require-dev": {
       "prestashop/php-dev-tools": "^4",
