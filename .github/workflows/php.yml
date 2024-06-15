@@ -26,20 +26,20 @@ jobs:
           other-cmds: '--config=.php-cs-fixer.dist.php'
   phpstan:
     name: PHPStan
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         presta-versions: ['9.0.0-alpha.1']
     steps:
-      - name: Pull PrestaShop files (Tag ${{ matrix.presta-versions }})
-        run: docker run -tid --rm -v ps-volume:/var/www/html --name temp-ps prestashop/prestashop
-      - name: Wait for container to be loaded
-        run: sleep 10
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
           php-version: 8.1
           coverage: xdebug
+      - name: Pull PrestaShop files (Tag ${{ matrix.presta-versions }})
+        run: docker run -tid --rm -v ps-volume:/var/www/html --name temp-ps prestashop/prestashop
+      - name: Wait for container to be loaded
+        run: sleep 10
       - name: Checkout
         uses: actions/checkout@v4
       - name: Cache vendor folder
