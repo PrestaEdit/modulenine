@@ -37,7 +37,7 @@ jobs:
           php-version: 8.1
           coverage: xdebug
       - name: Pull PrestaShop files (Tag ${{ matrix.presta-versions }})
-        run: docker run -tid --rm -v ps-volume:/var/www/html --name temp-ps prestashop/prestashop:nightly-8.1
+        run: docker run -tid --rm -v ps-volume:/var/www/html --name temp-ps prestashop/prestashop:nightly-8.1-apache
       - name: Wait for container to be loaded
         run: sleep 10
       - name: Checkout
