@@ -23,6 +23,6 @@ echo "Run PHPStan using phpstan-${PS_VERSION}.neon file"
 docker run --rm --volumes-from temp-ps \
        -v $PWD:/var/www/html/modules/creativeelements \
        -e _PS_ROOT_DIR_=/var/www/html \
-       --workdir=/var/www/html/modules/creativeelements phpstan/phpstan:0.12 \
+       --workdir=/var/www/html/modules/creativeelements phpstan/phpstan:1.11 \
        analyse \
        --configuration=/var/www/html/modules/creativeelements/tests/phpstan/phpstan-$PS_VERSION.neon
