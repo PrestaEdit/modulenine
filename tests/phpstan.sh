@@ -9,7 +9,7 @@ echo "Pull PrestaShop files (Tag ${PS_VERSION})"
 docker rm -f temp-ps || true
 docker volume rm -f ps-volume || true
 
-docker run -tid --rm -v ps-volume:/var/www/html --name temp-ps prestedit/base:$PS_VERSION
+docker run -tid --rm -v ps-volume:/var/www/html --name temp-ps prestaedit/base:$PS_VERSION
 
 # Clear previous instance of the module in the PrestaShop volume
 echo "Clear previous module"
