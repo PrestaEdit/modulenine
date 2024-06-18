@@ -24,6 +24,8 @@ jobs:
         uses: prestashopcorp/github-action-php-cs-fixer@master
         with:
           other-cmds: '--config=.php-cs-fixer.dist.php'
+
+  # Run PHPStan against the module and a PrestaShop release
   phpstan:
     name: PHPStan
     runs-on: ubuntu-latest
@@ -34,21 +36,30 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 8.1
-          coverage: xdebug
-      - name: Pull PrestaShop files (Tag ${{ matrix.presta-versions }})
-        run: docker run -tid --rm -v ps-volume:/var/www/html --name temp-ps prestaedit/base:9.0.0-alpha.1
-      - name: Wait for container to be loaded
-        run: sleep 10
+          php-version: '7.4'
+
       - name: Checkout
-        uses: actions/checkout@v4
-      - name: Install dependencies
-        uses: php-actions/composer@v6
+        uses: actions/checkout@v3.1.0
+
+      # Add vendor folder in cache to make next builds faster
+      - name: Cache vendor folder
+        uses: actions/cache@v3
         with:
-          php_version: "8.1"
-          version: 2
-      - name : Run PHPStan
-        run: docker run --rm --volumes-from temp-ps -v $PWD:/web/module -e _PS_ROOT_DIR_=/var/www/html --workdir=/web/module phpstan/phpstan:1.11.5 analyse --configuration=/web/module/tests/phpstan/phpstan-${{ matrix.presta-versions }}.neon
+          path: vendor
+          key: php-${{ hashFiles('composer.lock') }}
+
+      # Add composer local folder in cache to make next builds faster
+      - name: Cache composer folder
+        uses: actions/cache@v3
+        with:
+          path: ~/.composer/cache
+          key: php-composer-cache
+
+      - run: composer install
+
+      # Docker images prestashop/prestashop may be used, even if the shop remains uninstalled
+      - name: Execute PHPStan on PrestaShop (Tag ${{ matrix.presta-versions }})
+        run: ./tests/phpstan.sh ${{ matrix.presta-versions }}
 
   phpunit:
     name: PHPUnit
