@@ -89,4 +89,4 @@ jobs:
           key: php-composer-cache
 
       - run: composer install
-      - run: make phpunit
+      - run: composer run test
