@@ -11,7 +11,7 @@ docker volume rm -f ps9-php8 || true
 
 docker run -tid --rm -v ps9-php8:/var/www/html --name ps9-php8 prestaedit/prestashop:$PS_VERSION
 
-docker exec -it ps9-php8 php -v
+docker exec -i ps9-php8 php -v
 
 # Clear previous instance of the module in the PrestaShop volume
 echo "Clear previous module"
