@@ -4,12 +4,9 @@ includes:
 parameters:
   paths:
     # From PHPStan 0.12, paths to check are relative to the neon file
-    - ../../creativeelements.php
+    - ../../modulenine.php
     - ../../classes/
     - ../../controllers/
-    - ../../core/
-    - ../../includes/
-    - ../../upgrade/
   ignoreErrors:
   reportUnmatchedIgnoredErrors: false
   level: 5

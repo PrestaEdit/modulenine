@@ -1,5 +1,5 @@
 {
-    "name": "prestaedit/creativeelements",
+    "name": "prestaedit/modulenine",
     "type": "prestashop-module",
     "config": {
       "preferred-install": "dist",
@@ -22,12 +22,9 @@
     },
     "autoload": {
       "classmap": [
-        "creativeelements.php",
+        "modulenine.php",
         "classes/",
-        "controllers/",
-        "core/",
-        "includes/",
-        "modules/"
+        "controllers/"
       ]
     },
     "scripts": {
