@@ -6,21 +6,23 @@ set -e
 # Docker images prestashop/prestashop may be used, even if the shop remains uninstalled
 echo "Pull PrestaShop files (Tag ${PS_VERSION})"
 
-docker rm -f ps-volume || true
-docker volume rm -f ps-volume || true
+docker rm -f ps9-php8 || true
+docker volume rm -f ps9-php8 || true
 
-docker run -tid --rm -v ps-volume:/var/www/html --name ps-volume prestaedit/prestashop:$PS_VERSION
+docker run -tid --rm -v ps9-php8:/var/www/html --name ps9-php8 prestaedit/prestashop:$PS_VERSION
+
+docker exec -it ps9-php8 php -v
 
 # Clear previous instance of the module in the PrestaShop volume
 echo "Clear previous module"
 
-docker exec -tid ps-volume rm -rf /var/www/html/modules/creativeelements
+docker exec -tid ps9-php8 rm -rf /var/www/html/modules/creativeelements
 
 # Run a container for PHPStan, having access to the module content and PrestaShop sources.
 # This tool is outside the composer.json because of the compatibility with PHP 5.6
 echo "Run PHPStan using phpstan-${PS_VERSION}.neon file"
 
-docker run --rm --volumes-from ps-volume \
+docker run --rm --volumes-from ps9-php8 \
        -v $PWD:/var/www/html/modules/creativeelements \
        -e _PS_ROOT_DIR_=/var/www/html \
        --workdir=/var/www/html/modules/creativeelements phpstan/phpstan:0.12 \
