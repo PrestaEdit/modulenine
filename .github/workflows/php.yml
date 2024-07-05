@@ -31,6 +31,41 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
+        presta-versions: ['1.7.8', '8.1.7']
+    steps:
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '7.4'
+
+      - name: Checkout
+        uses: actions/checkout@v3.1.0
+
+      # Add vendor folder in cache to make next builds faster
+      - name: Cache vendor folder
+        uses: actions/cache@v3
+        with:
+          path: vendor
+          key: php-${{ hashFiles('composer.lock') }}
+
+      # Add composer local folder in cache to make next builds faster
+      - name: Cache composer folder
+        uses: actions/cache@v3
+        with:
+          path: ~/.composer/cache
+          key: php-composer-cache
+
+      - run: composer install
+
+      # Docker images prestashop/prestashop may be used, even if the shop remains uninstalled
+      - name: Execute PHPStan on PrestaShop (Tag ${{ matrix.presta-versions }})
+        run: chmod +x ./tests/phpstan.sh && ./tests/phpstan.sh ${{ matrix.presta-versions }}
+
+  phpstan-v9:
+    name: PHPStan
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
         presta-versions: ['9.0.0-alpha.1']
     steps:
       - name: Setup PHP
@@ -59,7 +94,7 @@ jobs:
 
       # Docker images prestashop/prestashop may be used, even if the shop remains uninstalled
       - name: Execute PHPStan on PrestaShop (Tag ${{ matrix.presta-versions }})
-        run: chmod +x ./tests/phpstan.sh && ./tests/phpstan.sh ${{ matrix.presta-versions }}
+        run: chmod +x ./tests/phpstan-v9.sh && ./tests/phpstan-v9.sh ${{ matrix.presta-versions }}
 
   phpunit:
     name: PHPUnit
