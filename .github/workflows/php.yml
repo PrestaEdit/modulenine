@@ -51,7 +51,7 @@ jobs:
     continue-on-error: true
     strategy:
       matrix:
-        presta-versions: ["1.6.1.24"]
+        presta-versions: ["1.6.1.23"]
     steps:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
