@@ -20,4 +20,4 @@ docker run --rm --volumes-from temp-ps \
        -e _PS_ROOT_DIR_=/var/www/html \
        --workdir=/var/www/html/modules/modulenine phpstan/phpstan:0.12.54 \
        analyse \
-       --configuration=/var/www/html/modules/modulenine/tests/php/phpstan/phpstan-$PS_VERSION.neon
+       --configuration=/var/www/html/modules/modulenine/tests/phpstan/phpstan-$PS_VERSION.neon
