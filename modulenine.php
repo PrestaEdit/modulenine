@@ -21,7 +21,9 @@ class ModuleNine extends Module
 
     protected function prestashop8()
     {
-        $temp = Carrier::getCarrierNameFromShopName();
+        if (version_compare(_PS_VERSION_, '8.0.0', '<')) {
+            $temp = Carrier::getCarrierNameFromShopName();
+        }
     }
 
     protected function prestashop9()
