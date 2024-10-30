@@ -130,7 +130,7 @@ jobs:
           php-version: "8.1"
 
       - name: Checkout
-        uses: actions/checkout@v3.1.0
+        uses: actions/checkout@v4
 
       # Add vendor folder in cache to make next builds faster
       - name: Cache vendor folder
