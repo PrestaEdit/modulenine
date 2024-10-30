@@ -9,9 +9,24 @@ class ModuleNine extends Module
         parent::__construct();
     }
 
-    protected function test()
+    protected function prestashop16()
     {
-        $order = new Order(1);
-        $order->getDiscounts();
+        //todo
+    }
+
+    protected function prestashop17()
+    {
+        //todo
+    }
+
+    protected function prestashop8()
+    {
+        $temp = Carrier::getCarrierNameFromShopName();
+    }
+
+    protected function prestashop9()
+    {
+        $temp = new Order(1);
+        $temp->getDiscounts();
     }
 }
