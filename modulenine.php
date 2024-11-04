@@ -11,19 +11,22 @@ class ModuleNine extends Module
 
     protected function prestashop16()
     {
-        //todo
+        // Methods are more times deprecated, but not removed.
+        // So, use a newer one
+        $temp = new EmployeeSession();
     }
 
     protected function prestashop17()
     {
-        //todo
+        // Methods are more times deprecated, but not removed, again.
+        // So, use a newer one
+        // @phpstan-ignore class.notFound
+        $temp = new CustomerSession();
     }
 
     protected function prestashop8()
     {
-        if (version_compare(_PS_VERSION_, '8.0.0', '<')) {
-            $temp = Carrier::getCarrierNameFromShopName();
-        }
+        $temp = Carrier::getCarrierNameFromShopName();
     }
 
     protected function prestashop9()
