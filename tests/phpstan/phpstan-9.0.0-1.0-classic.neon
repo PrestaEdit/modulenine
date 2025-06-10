@@ -1,0 +1,14 @@
+includes:
+	- %currentWorkingDirectory%/vendor/prestashop/php-dev-tools/phpstan/ps-module-extension.neon
+
+parameters:
+  paths:
+    # From PHPStan 0.12, paths to check are relative to the neon file
+    - ../../modulenine.php
+    - ../../classes/
+    - ../../controllers/
+  reportUnmatchedIgnoredErrors: false
+  level: 5
+  ignoreErrors:
+    - '~^Call to an undefined static method Carrier::getCarrierNameFromShopName\(\)\.$~'
+    - '~^Call to an undefined method Order::getDiscounts\(\)\.$~'
