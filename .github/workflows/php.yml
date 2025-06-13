@@ -187,4 +187,4 @@ jobs:
 
       # Docker images prestashop/prestashop may be used, even if the shop remains uninstalled
       - name: Execute PHPStan on PrestaShop (Tag ${{ matrix.presta-versions }})
-        run: chmod +x ./tests/phpstan-v9.sh && ./tests/phpstan-v9-classic.sh ${{ matrix.presta-versions }}
+        run: chmod +x ./tests/phpstan-v9-classic.sh && ./tests/phpstan-v9-classic.sh ${{ matrix.presta-versions }}
